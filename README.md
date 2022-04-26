@@ -1,24 +1,17 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# 開発言語
+- Ruby
+- Rails
 
-Things you may want to cover:
+# 実行手順
 
-* Ruby version
+# カタログ設計
 
-* System dependencies
+# テーブル定義書
 
-* Configuration
+# ワイヤーフレーム
 
-* Database creation
+# ER図
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# 画面遷移図
