@@ -8,6 +8,7 @@
 > git clone https://github.com/ryotahaga0723/timer_app.git  
 > cd timer_app  
 > bundle install  
+> yarn install --check-files
 > rails db:create && rails db:migrate  
 > rails db:seed  
 > rails s
