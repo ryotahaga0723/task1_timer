@@ -5,11 +5,11 @@
 - Rails 6.0.4.7
 
 ## 実行手順
-> git clone https://github.com/ryotahaga0723/task1_timer.git
-> cd timer_app
-> bundle install
-> rails db:create && rails db:migrate
-> rails seed
+> git clone https://github.com/ryotahaga0723/task1_timer.git  
+> cd timer_app  
+> bundle install  
+> rails db:create && rails db:migrate  
+> rails seed  
 > rails s
 
 ## カタログ設計
