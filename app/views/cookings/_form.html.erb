@@ -1,0 +1,42 @@
+<%= form_with(model: cooking, local: true) do |form| %>
+  <% if cooking.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(cooking.errors.count, "error") %> prohibited this cooking from being saved:</h2>
+
+      <ul>
+        <% cooking.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :材料 %>
+    <%= form.text_field :cooking_material %>
+  </div>
+
+  <div class="field">
+    <%= form.label :調理工程 %>
+    <%= form.text_field :cooking_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :時 %>
+    <%= form.number_field :hour, min: 0, max: 23 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :分 %>
+    <%= form.number_field :minute, min: 0, max: 59 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :秒 %>
+    <%= form.number_field :second, min: 0, max: 59 %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "登録" %>
+  </div>
+<% end %>

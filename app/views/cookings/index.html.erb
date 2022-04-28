@@ -1,0 +1,55 @@
+<h1>タイマー一覧</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>材料</th>
+      <th>調理工程</th>
+      <th colspan="5">時間</th>
+      <th>タイマーセット</th>
+      <% if logged_in? %>
+        <th>編集</th>
+        <th>削除</th>    
+      <% end %>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cookings.each do |cooking| %>
+      <tr>
+        <td><%= cooking.cooking_material %></td>
+        <td><%= cooking.cooking_name %></td>
+        <td><%= cooking.hour.to_i %></td>
+        <td><%= ":" %></td>
+        <td>
+          <% if cooking.minute <10 %>
+            <%= "0" + cooking.minute.to_s %>
+          <% else %>
+            <%= cooking.minute.to_i.to_s %>
+          <% end %>
+          </td>
+        <td><%= ":" %></td>
+        <td>
+          <% if cooking.second.to_i <10 %>
+            <%= "0" + cooking.second.to_i.to_s %>
+          <% else %>
+            <%= cooking.second.to_i %>
+          <% end %>
+      </td>
+      <td><%= link_to 'タイマーセット', timer_id_path(cooking) %></td>
+      <% if logged_in? %>        
+          <td><%= link_to '編集', edit_cooking_path(cooking) %></td>
+          <td><%= link_to '削除', cooking, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<% if logged_in? %>
+  <%= link_to '新規登録', new_cooking_path %>
+<% end %>
+
