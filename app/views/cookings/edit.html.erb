@@ -1,5 +1,12 @@
-<h1>タイマー編集</h1>
+<section class="section">
+  <div class= "section_inner">
+    <h1>タイマー編集</h1>
 
-<%= render 'form', cooking: @cooking %>
+    <%= render 'form', cooking: @cooking %>
+    <div id = "back">
+      <%= link_to '戻る', cookings_path %>
+    </div>
 
-<%= link_to '戻る', cookings_path %>
+  </div>
+</section>
+

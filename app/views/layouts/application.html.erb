@@ -10,20 +10,69 @@
   </head>
 
   <body>
-    <% if logged_in? %>
-      <%= link_to "タイマー", timer_path(current_user.id) %>
-      <%= link_to "タイマー一覧", cookings_path(current_user.id) %>
-      <%= link_to "アカウント", user_path(current_user.id) %>
-      <%= link_to "ログアウト", session_path(current_user.id), method: :delete %>
-    <% else %>
-    <%= link_to "タイマー", timer_path %>
-    <%= link_to "タイマー一覧", cookings_path %>  
-      <%= link_to "アカウント登録", new_user_path %>
-      <%= link_to "ログイン", new_session_path %>
-    <% end %>
-    <% flash.each do |key, value| %>
-      <%= content_tag(:div, value, class: "#{key}") %>
-    <% end %>   
+    <hearder>
+      <div class = "header">
+        <div class = "log">
+          <h3>Cooking Time</h3>
+        </div>
+        <ul class = "nav">
+          <% if logged_in? %>
+            <div class = "nav_item">
+              <li><%= link_to "タイマー", timer_path(current_user.id) %></li>
+            </div>
+            <div class = "nav_item">
+              <li><%= link_to "タイマー一覧", cookings_path(current_user.id) %></li>
+            </div>
+            <div class = "nav_item">
+              <li><%= link_to "アカウント", user_path(current_user.id) %></li>
+            </div>
+            <div class = "nav_item">
+              <li><%= link_to "ログアウト", session_path(current_user.id), method: :delete %></li>
+            </div>
+          <% else %>
+            <div class = "nav_item">
+              <li><%= link_to "タイマー", timer_path %></li>
+            </div>
+            <div class = "nav_item">
+              <li><%= link_to "タイマー一覧", cookings_path %></li>
+            </div>
+            <div class = "nav_item">
+              <li><%= link_to "アカウント登録", new_user_path %></li>
+            </div>
+            <div class = "nav_item">
+              <li><%= link_to "ログイン", new_session_path %></li>
+            </div>
+          <% end %>
+        </ul>
+      </div>
+    </header>
+
     <%= yield %>
+    
+    <footer>
+      <nav>
+        <ul class = "footer_item">
+          <% if logged_in? %>
+            <div class = "footer_nav_item">
+              <li><%= link_to "タイマー", timer_path(current_user.id) %></li>
+            </div>
+            <div class = "footer_nav_item">
+              <li><%= link_to "タイマー一覧", cookings_path(current_user.id) %></li>
+            </div>
+          <% else %>
+            <div class = "footer_nav_item">
+              <li><%= link_to "タイマー", timer_path %></li>
+            </div>
+            <div class = "footer_nav_item">
+              <li><%= link_to "タイマー一覧", cookings_path %></li> 
+            </div>
+          <% end %>
+          <div class = "footer_nav_item">
+            <li><h4>Cooking Time</h4></li>
+          </div>
+        </ul>
+        <p class ="footer_copy">©haga ryota</p>
+      </nav>
+    </footer>
   </body>
 </html>

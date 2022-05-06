@@ -1,0 +1,37 @@
+<h2><%= cooking.hour*60 + cooking.minute %>分で作れるレシピ</h2>
+<% unless recipes.empty? %>
+  <div class = "recipe">
+        <% recipes.each do |recipe| %>
+          <div class = "base-image">
+            <div class = "base">
+              <h3 class="recipe_name">料理名：<%= recipe.recipe_name %></h3>
+              時間：<%= recipe.recipe_time %>分
+              <div class = "material">
+                材料：
+                <% recipe.recipe_materials.each do |recipe_material| %>
+                  <table>
+                    <tr>
+                      <td><%= recipe_material.material %></td>
+                      <td><%= recipe_material.quantity %></td>
+                    </tr>
+                  </table>
+                <% end %>
+              </div>
+            </div>
+            <% if recipe.image.attached? %>
+              <%= image_tag recipe.image,class: "recipe_img" %>
+            <% end %>
+          </div>
+          <div class = "content">
+            ＜料理手順＞
+            <% recipe.recipe_procedures.each_with_index do |recipe_procedure,i| %>
+              <ul>  
+              <li><%= i+1 %>. <%= recipe_procedure.procedure %><li>
+              </ul>
+            <% end %>
+          </div>
+        <% end %>
+  </div>
+  <% else %>
+    <%= "レシピがありません" %>
+  <% end %>

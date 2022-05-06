@@ -5,5 +5,5 @@ class User < ApplicationRecord
   before_validation { email.downcase! }
   validates :password, length: { minimum: 6 ,maximum: 255}
 
-  has_many :cookings
+  has_and_belongs_to_many :cookings
 end

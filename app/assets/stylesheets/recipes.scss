@@ -1,0 +1,41 @@
+// Place all the styles related to the recipes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.recipe{
+    width: 80%;
+    border: solid 3px #000000;
+}
+
+.base-image{
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.base {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    background: #fff;
+}
+
+.recipe_img {
+    width: 55%;
+}
+
+ul{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.content{
+    border-bottom: 1px solid black;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.recipe_name{
+    border-bottom: 1px solid black;
+}

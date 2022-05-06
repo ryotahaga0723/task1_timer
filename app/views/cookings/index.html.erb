@@ -1,55 +1,81 @@
-<h1>タイマー一覧</h1>
+<section class="section">
+<div class = "section_inner">
+  <div class= "title">
+    <h1>タイマー一覧</h1>
+  </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>材料</th>
-      <th>調理工程</th>
-      <th colspan="5">時間</th>
-      <th>タイマーセット</th>
-      <% if logged_in? %>
-        <th>編集</th>
-        <th>削除</th>    
-      <% end %>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<% flash.each do |key, value| %>
+  <%= content_tag(:div, value, class: "#{key}") %>
+<% end %>   
 
-  <tbody>
-    <% @cookings.each do |cooking| %>
+  <%= search_form_for @q do |f| %>
+    <div class="search">
+    <table>
+      <tbody>
+        <tr>
+          <td><%= f.label :cooking_material_or_cooking_name_cont, 'キーワード' %></td>
+          <td><%= f.search_field :cooking_material_or_cooking_name_cont %></td>
+        </tr>
+      </tbody>
+    </table>  
+    <%= f.submit '検索' %>
+    </div>
+  <% end %>
+
+  <table>
+    <thead>
       <tr>
-        <td><%= cooking.cooking_material %></td>
-        <td><%= cooking.cooking_name %></td>
-        <td><%= cooking.hour.to_i %></td>
-        <td><%= ":" %></td>
-        <td>
-          <% if cooking.minute <10 %>
-            <%= "0" + cooking.minute.to_s %>
-          <% else %>
-            <%= cooking.minute.to_i.to_s %>
-          <% end %>
-          </td>
-        <td><%= ":" %></td>
-        <td>
-          <% if cooking.second.to_i <10 %>
-            <%= "0" + cooking.second.to_i.to_s %>
-          <% else %>
-            <%= cooking.second.to_i %>
-          <% end %>
-      </td>
-      <td><%= link_to 'タイマーセット', timer_id_path(cooking) %></td>
-      <% if logged_in? %>        
-          <td><%= link_to '編集', edit_cooking_path(cooking) %></td>
-          <td><%= link_to '削除', cooking, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>材料</th>
+        <th>調理工程</th>
+        <th colspan="5">時間</th>
+        <th>タイマーセット</th>
+        <% if logged_in? %>
+          <th>編集</th>
+          <th>削除</th>    
         <% end %>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @cookings.each do |cooking| %>
+        <tr>
+          <td><%= cooking.cooking_material %></td>
+          <td><%= cooking.cooking_name %></td>
+          <td><%= cooking.hour %></td>
+          <td><%= ":" %></td>
+          <td>
+            <% if cooking.minute <10 %>
+              <%= "0" + cooking.minute.to_s %>
+            <% else %>
+              <%= cooking.minute %>
+            <% end %>
+            </td>
+          <td><%= ":" %></td>
+          <td>
+            <% if cooking.second <10 %>
+              <%= "0" + cooking.second.to_s %>
+            <% else %>
+              <%= cooking.second %>
+            <% end %>
+          </td>
+          <td><%= link_to 'タイマーセット', timer_id_cooking_path(cooking) %></td>
+          <% if logged_in? %>        
+            <td><%= link_to '編集', edit_cooking_path(cooking) %></td>
+            <td><%= link_to '削除', cooking, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<% if logged_in? %>
-  <%= link_to '新規登録', new_cooking_path %>
-<% end %>
+  <%= paginate @cookings %>
+
+  <br>
+
+  <% if logged_in? %>
+    <%= link_to '新規登録', new_cooking_path %>
+  <% end %>
+  </div>
+</section>
 

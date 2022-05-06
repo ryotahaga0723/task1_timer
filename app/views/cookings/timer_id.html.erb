@@ -1,13 +1,24 @@
-<form name="timer">
+<section class="section">
+<form name="timer" id="timer_id">
+<div class = "number">
 <input type="number" value=<%= @cooking.hour %> min=0 max=24 %>:
 <input type="number" value=<%= @cooking.minute %> min=0 max=59>:
 <input type="number" value=<%= @cooking.second %> min=0 max=59><br>
-<input type="button" value="start" onclick="cntStart()">
+</div>
+<div class = "timer_button">
+<input type="button" value="start" id= "start" onclick="cntStart()">
 <input type="button" value="stop" onclick="cntStop()">
 <input type="button" value="reset" id="reset" onclick="reSet()">
+</div>
 </form>
 
+<div id="recipe_area">
+  <%= render partial: 'recipes/show', locals: { cooking: @cooking, recipes: @recipes } %>
+</div>
+</section>
+
 <script>
+
 var timer1;
 
 

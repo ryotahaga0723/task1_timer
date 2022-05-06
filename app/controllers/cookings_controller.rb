@@ -4,10 +4,15 @@ class CookingsController < ApplicationController
 
   # GET /cookings or /cookings.json
   def index
+    Cooking.where(hour: nil).update_all(hour: 0)
+    Cooking.where(minute: nil).update_all(minute: 0)
+    Cooking.where(second: nil).update_all(second: 0)
     if logged_in?
-      @cookings = Cooking.all
+      @q = Cooking.left_outer_joins(:users).where(cookings_users:{user_id: current_user.id}).ransack(params[:q])
+      @cookings = @q.result(distinct: true).page(params[:page])
     else
-      @cookings = Cooking.where(user_id: nil)
+      @q = Cooking.left_outer_joins(:users).where(cookings_users:{user_id: nil}).ransack(params[:q])
+      @cookings = @q.result(distinct: true).page(params[:page])
     end
   end
 
@@ -26,16 +31,13 @@ class CookingsController < ApplicationController
 
   # POST /cookings or /cookings.json
   def create
+    @user = current_user
     @cooking = current_user.cookings.new(cooking_params)
-
-    respond_to do |format|
-      if @cooking.save
-        format.html { redirect_to cookings_url(@cooking) }
-        format.json { render :index, status: :created, location: @cooking }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @cooking.errors, status: :unprocessable_entity }
-      end
+    if @cooking.save
+      @user.cookings << @cooking
+      redirect_to cookings_path(current_user.id)
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -43,7 +45,7 @@ class CookingsController < ApplicationController
   def update
     respond_to do |format|
       if @cooking.update(cooking_params)
-        format.html { redirect_to cooking_url(@cooking.id), notice: "Cooking was successfully updated." }
+        format.html { redirect_to cookings_url, notice: "タイマーを更新しました" }
         format.json { render :show, status: :ok, location: @cooking }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -57,7 +59,7 @@ class CookingsController < ApplicationController
     @cooking.destroy
 
     respond_to do |format|
-      format.html { redirect_to cookings_url, notice: "Cooking was successfully destroyed." }
+      format.html { redirect_to cookings_url, notice: "タイマーを消去しました。" }
       format.json { head :no_content }
     end
   end
@@ -66,6 +68,7 @@ class CookingsController < ApplicationController
   end
 
   def timer_id
+    @recipes = Recipe.where("recipe_time < ? ", @cooking.minute+@cooking.hour*60).order("RANDOM()").limit(3)
   end
 
   private

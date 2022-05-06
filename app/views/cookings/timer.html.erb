@@ -1,11 +1,26 @@
-<form name="timer">
+<div class = "message">
+<% flash.each do |key, value| %>
+  <%= content_tag(:div, value, class: "#{key}") %>
+<% end %>   
+</div>
+
+<section class="section">
+<form name="timer" id="timer">
+<div class = "number">
 <input type="number" value="0" min=0 max=24>:
 <input type="number" value="0" min=0 max=59>:
 <input type="number" value="0" min=0 max=59><br>
+</div>
+<div class = "timer_button">
 <input type="button" value="start" onclick="cntStart()">
 <input type="button" value="stop" onclick="cntStop()">
 <input type="button" value="reset" id="reset" onclick="reSet()">
+</div>
 </form>
+</section>
+
+<div class= "space">
+</div>
 
 <script>
 var timer1;
