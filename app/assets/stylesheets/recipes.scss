@@ -4,13 +4,16 @@
 
 .recipe{
     width: 80%;
-    border: solid 3px #000000;
+    border: solid 3px rgb(245, 183, 113);
+    background-color: #fff;
+    border-radius: 20px;
+    margin-right: auto;
+  margin-left: auto;
 }
 
 .base-image{
     display: flex;
     justify-content: space-between;
-
 }
 
 .base {
@@ -18,11 +21,12 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    background: #fff;
 }
 
 .recipe_img {
-    width: 55%;
+    width: 50%;
+    padding-top: 5px;
+    padding-right: 5px;
 }
 
 ul{
@@ -31,11 +35,12 @@ ul{
 }
 
 .content{
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid rgb(245, 183, 113);
     padding: 10px;
     margin-bottom: 20px;
 }
 
 .recipe_name{
-    border-bottom: 1px solid black;
+    color: rgb(245, 183, 113);
+    font-size: 20px;
 }

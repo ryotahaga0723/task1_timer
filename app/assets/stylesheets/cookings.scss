@@ -1,9 +1,6 @@
 // Place all the styles related to the cookings controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
-.section_inner{
-    padding-top: 60px;
-}
 
 .search{
     display: flex;
@@ -11,22 +8,29 @@
 }
 
 #recipe_area{
-    margin-top: 200px;    
+    margin-top: 200px;
+    width: 100%;
 }
 
 #timer_id{
+    margin-top: 10px;
     padding-top: 50px;
-    padding-bottom: 50px;
+    padding-bottom: 0px;
     background-color: #fff;
     height: 100px;
     position: fixed;
     width: 80%;
+    border-radius: 20px;
+    border: 3px solid rgb(245, 183, 113);
 }
 
 #timer{
     padding-top: 50px;
     padding-bottom: 50px;
     background-color: #fff;
+    border-radius: 20px;
+    border: 3px solid rgb(245, 183, 113);
+
 }
 
 .number{
